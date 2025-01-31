@@ -1,9 +1,14 @@
-import { Content } from "@prismicio/client";
+import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 
-import { Bounded } from '../../components/Bounded';
+import { Bounded } from "../../components/Bounded";
 import { LazyYouTubePlayer } from "./LazyYouTubePlayer";
+import clsx from "clsx";
+import Image from "next/image";
+
+const MASK_CLASSES =
+  "[mask-image:url(/video-mask.png)] [mask-mode:alpha] [mask-position:center_center] [mask-repeat:no-repeat] [mask-size:100%_auto]";
 /**
  * Props for `VideoBlock`.
  */
@@ -22,9 +27,38 @@ const VideoBlock = ({ slice }: VideoBlockProps): JSX.Element => {
       <h2 className="sr-only">Video Reel</h2>
       <div className="relative aspect-video">
         {/* Masks */}
+        <div
+          className={clsx(
+            MASK_CLASSES,
+            "bg-brand-lime absolute inset-0 ~translate-x-2/3 ~translate-y-2/3"
+          )}
+        />
+        <div
+          className={clsx(
+            MASK_CLASSES,
+            "bg-white absolute inset-0 ~translate-x-1/3 ~translate-y-1/2"
+          )}
+        />
+        <div
+          className={clsx(
+            MASK_CLASSES,
+            "bg-white absolute inset-0 ~translate-x-1/2 -~translate-y-1/3"
+          )}
+        />
         {/* Video */}
-        <LazyYouTubePlayer youTubeID={slice.primary.youtube_video_id} />
-        {/* Texture Overlay */}
+        <div className={clsx(MASK_CLASSES, "relative h-full")}>
+          {isFilled.keyText(slice.primary.youtube_video_id) ? (
+            <LazyYouTubePlayer youTubeID={slice.primary.youtube_video_id} />
+          ) : null}
+
+          {/* Texture Overlay */}
+          <Image
+            src="/image-texture.png"
+            alt=""
+            fill
+            className="pointer-event-none object-cover opacity-50"
+          />
+        </div>
       </div>
     </Bounded>
   );
