@@ -12,6 +12,7 @@ import { Heading } from "@/components/Heading";
 import { ButtonLink } from "@/components/ButtonLink";
 import { Bounded } from "@/components/Bounded";
 import { ParallaxImage } from "./ParallaxImage";
+import { SlideIn } from "@/components/SlideIn";
 
 declare module "react" {
   interface CSSProperties {
@@ -40,7 +41,7 @@ const TextAndImage = ({ slice, index }: TextAndImageProps): JSX.Element => {
         theme === "Navy" && "bg-texture bg-brand-navy text-white",
         theme === "Lime" && "bg-texture bg-brand-lime text-white"
       )}
-      style={{ "--index": index}}
+      style={{ "--index": index }}
     >
       <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-24">
         <div
@@ -49,18 +50,24 @@ const TextAndImage = ({ slice, index }: TextAndImageProps): JSX.Element => {
             slice.variation === "imageLeft" && "md:order-2"
           )}
         >
-          <Heading size="lg" as="h2">
-            <PrismicText field={slice.primary.heading} />
-          </Heading>
-          <div className="max-w-md text-lg leading-relaxed">
-            <PrismicRichText field={slice.primary.body} />
-          </div>
-          <ButtonLink
-            field={slice.primary.button}
-            color={theme === "Lime" ? "orange" : "lime"}
-          >
-            {slice.primary.button.text}
-          </ButtonLink>
+          <SlideIn>
+            <Heading size="lg" as="h2">
+              <PrismicText field={slice.primary.heading} />
+            </Heading>
+          </SlideIn>
+          <SlideIn>
+            <div className="max-w-md text-lg leading-relaxed">
+              <PrismicRichText field={slice.primary.body} />
+            </div>
+          </SlideIn>
+          <SlideIn>
+            <ButtonLink
+              field={slice.primary.button}
+              color={theme === "Lime" ? "orange" : "lime"}
+            >
+              {slice.primary.button.text}
+            </ButtonLink>
+          </SlideIn>
         </div>
 
         <ParallaxImage

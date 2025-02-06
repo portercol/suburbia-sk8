@@ -6,6 +6,7 @@ import { createClient } from "@/prismicio";
 import { Bounded } from "@/components/Bounded";
 import { Heading } from "@/components/Heading";
 import { Skater } from "./Skater";
+import { SlideIn } from "@/components/SlideIn";
 
 /**
  * Props for `TeamGrid`.
@@ -32,7 +33,9 @@ const TeamGrid = async ({ slice }: TeamGridProps): Promise<JSX.Element> => {
         {skaters.map((skater, index) => (
           <React.Fragment key={index}>
             {skater.data.first_name && (
-              <Skater index={index} skater={skater}></Skater>
+              <SlideIn>
+                <Skater index={index} skater={skater} />
+              </SlideIn>
             )}
           </React.Fragment>
         ))}
