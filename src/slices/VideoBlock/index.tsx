@@ -2,7 +2,7 @@ import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { JSX } from "react";
 
-import { Bounded } from "../../components/Bounded";
+import { Bounded } from "@/components/Bounded";
 import { LazyYouTubePlayer } from "./LazyYouTubePlayer";
 import clsx from "clsx";
 import Image from "next/image";
