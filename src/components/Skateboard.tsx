@@ -32,7 +32,7 @@ type GLTFResult = GLTF & {
     Truck1: THREE.Mesh;
     Truck2: THREE.Mesh;
   };
-  materials: {};
+  materials: object;
 };
 
 export function Skateboard({
@@ -154,18 +154,18 @@ export function Skateboard({
   };
 
   useFrame(() => {
-    if (!wheelRefs.current || constantWheelSpin) return;
+    if (!wheelRefs.current || !constantWheelSpin) return;
     for (const wheel of wheelRefs.current) {
       wheel.rotation.x += 0.2
     }
   });
 
   useEffect(() => {
-    if (!wheelRefs.current || !constantWheelSpin) return;
+    if (!wheelRefs.current || constantWheelSpin) return;
     for (const wheel of wheelRefs.current) {
       // GSAP Rotation
       gsap.to(wheel.rotation, {
-        x: "-=30",
+        x: "+=30",
         duration: 2.5,
         ease: "circ.out",
       })
