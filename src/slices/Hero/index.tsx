@@ -11,7 +11,7 @@ import { Heading } from "@/components/Heading";
 import { ButtonLink } from "@/components/ButtonLink";
 import { WideLogo } from "@/slices/Hero/WideLogo";
 import { TallLogo } from "@/slices/Hero/TallLogo";
-import { InteractiveSkateboard } from "./InteractiveSkateboard";
+import { InteractiveSkateboard } from "./InteractiveSkateboard-test";
 
 const DEFAULT_DECK_TEXTURE = "/skateboard/Deck.webp";
 const DEFAULT_WHEEL_TEXTURE = "/skateboard/SkateWheel1.png";
