@@ -9,8 +9,8 @@ import { JSX } from "react";
 import { Bounded } from "@/components/Bounded";
 import { Heading } from "@/components/Heading";
 import { ButtonLink } from "@/components/ButtonLink";
-import { WideLogo } from "./WideLogo";
-import { TallLogo } from "./TallLogo";
+import { WideLogo } from "@/slices/Hero/WideLogo";
+import { TallLogo } from "@/slices/Hero/TallLogo";
 import { InteractiveSkateboard } from "./InteractiveSkateboard";
 
 const DEFAULT_DECK_TEXTURE = "/skateboard/Deck.webp";

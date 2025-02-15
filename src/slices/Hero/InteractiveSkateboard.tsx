@@ -19,6 +19,31 @@ type Props = {
   boltColor: string;
 };
 
+export function InteractiveSkateboard({
+  deckTextureURL,
+  wheelTextureURL,
+  truckColor,
+  boltColor,
+}: Props) {
+  return (
+    <div className="absolute inset-0 z-10 flex items-center justify-center">
+      <Canvas
+        className="min-h-[60rem] w-full"
+        camera={{ position: INITIAL_CAMERA_POSITION, fov: 55 }}
+      >
+        <Suspense>
+          <Scene
+            deckTextureURL={deckTextureURL}
+            wheelTextureURL={wheelTextureURL}
+            truckColor={truckColor}
+            boltColor={boltColor}
+          />
+        </Suspense>
+      </Canvas>
+    </div>
+  );
+}
+
 function Scene({
   deckTextureURL,
   wheelTextureURL,
@@ -263,30 +288,5 @@ function Scene({
         </Html>
       </group>
     </group>
-  );
-}
-
-export function InteractiveSkateboard({
-  deckTextureURL,
-  wheelTextureURL,
-  truckColor,
-  boltColor,
-}: Props) {
-  return (
-    <div className="absolute inset-0 z-10 flex items-center justify-center">
-      <Canvas
-        className="min-h-[60rem] w-full"
-        camera={{ position: INITIAL_CAMERA_POSITION, fov: 55 }}
-      >
-        <Suspense>
-          <Scene
-            deckTextureURL={deckTextureURL}
-            wheelTextureURL={wheelTextureURL}
-            truckColor={truckColor}
-            boltColor={boltColor}
-          />
-        </Suspense>
-      </Canvas>
-    </div>
   );
 }
