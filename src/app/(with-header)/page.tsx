@@ -1,14 +1,14 @@
 import { Metadata } from "next";
-import { Content } from "@prismicio/client";
 import { SliceComponentProps, SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import { Content } from "@prismicio/client";
 
 export default async function Page() {
   const client = createClient();
   const page = await client.getSingle("homepage");
-  const slices = bundleTextAndImageSlice(page.data.slices);
+  const slices = bundleTextAndImageSlices(page.data.slices);
 
   return (
     <SliceZone
@@ -43,7 +43,7 @@ type TextAndImageBundleSlice = {
   slices: Content.TextAndImageSlice[];
 };
 
-function bundleTextAndImageSlice(
+function bundleTextAndImageSlices(
   slices: Content.HomepageDocumentDataSlicesSlice[]
 ) {
   const res: (
