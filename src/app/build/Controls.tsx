@@ -1,9 +1,46 @@
-"use client"
+"use client";
 
-type Props = {}
+import { ReactNode } from "react";
+import { Content, KeyTextField } from "@prismicio/client";
+import clsx from "clsx";
 
-export default function Controls({}: Props) {
+import { Heading } from "@/components/Heading";
+
+type Props = Pick<
+  Content.BoardCustomizerDocumentData,
+  "wheels" | "decks" | "metals"
+> & { className?: string };
+
+export default function Controls({ wheels, decks, metals, className }: Props) {
+  return <div className={clsx("flex flex-col gap-6", className)}>
+    <Options title="Deck"></Options>
+    <Options title="Wheels"></Options>
+    <Options title="Trucks"></Options>
+    <Options title="Bolts"></Options>
+  </div>;
+}
+
+type OptionsProps = {
+  title?: ReactNode;
+  selectedName?: KeyTextField;
+  children?: ReactNode;
+};
+
+function Options({ title, selectedName, children }: OptionsProps) {
+  const formattedName = selectedName?.replace(/-/g, " ");
+
   return (
-    <div>Controls</div>
-  )
+    <div>
+      <div className="flex">
+        <Heading as="h2" size="xs" className="mb-2">
+          {title}
+        </Heading>
+        <p className="ml-3 text-zinc-300">
+          <span className="select-none text-zinc-500">| </span>
+          {formattedName}
+        </p>
+      </div>
+      <ul className="mb-1 flex flex-wrap gap-2">{children}</ul>
+    </div>
+  );
 }

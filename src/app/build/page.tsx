@@ -1,13 +1,14 @@
+import React from "react";
+import Link from "next/link";
+import { asImageSrc } from "@prismicio/client";
+import { createClient } from "@/prismicio";
+
 import { ButtonLink } from "@/components/ButtonLink";
 import { Heading } from "@/components/Heading";
 import { Logo } from "@/components/Logo";
-import Link from "next/link";
-import React from "react";
-
 import { CustomizerControlsProvder } from "./context";
-import { createClient } from "@/prismicio";
 import Preview from "./Preview";
-import { asImageSrc } from "@prismicio/client";
+import Controls from "./Controls";
 
 export default async function page() {
   const client = createClient();
@@ -42,13 +43,19 @@ export default async function page() {
             />
           </div>
           <Link href="/" className="absolute left-6 top-6">
-            <Logo className="h-12 text-white" />
+            <Logo className="h-12 text-brand-purple" />
           </Link>
         </div>
         <div className="grow bg-texture bg-zinc-900 text-white ~p-4/6 lg:w-96 lg:shrink-0 lg:grow-0">
           <Heading as="h1" size="sm" className="mb-6 mt-0">
             Build Your Board
           </Heading>
+          <Controls
+            wheels={wheels}
+            decks={decks}
+            metals={metals}
+            className="mb-6"
+          />
           <ButtonLink href="" color="lime" icon="plus">
             Add to cart
           </ButtonLink>

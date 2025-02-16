@@ -17,7 +17,7 @@ const DEFAULT_WHEEL_TEXTURE = "/skateboard/SkateWheel1.png";
 const DEFAULT_DECK_TEXTURE = "/skateboard/Deck.webp";
 const DEFAULT_TRUCK_COLOR = "#6F6E6A";
 const DEFAULT_BOLT_COLOR = "#6F6E6A";
-const ENVIRONMENT_COLOR = "3B3A3A";
+const ENVIRONMENT_COLOR = "333";
 
 type Props = {
   wheelTextureURLs: string[];
@@ -92,27 +92,27 @@ export default function Preview({ wheelTextureURLs, deckTextureURLs }: Props) {
 }
 
 function StageFloor() {
-  const normalMap = useTexture("/concrete-normal.avif");
-  normalMap.wrapS = THREE.RepeatWrapping;
-  normalMap.wrapT = THREE.RepeatWrapping;
-  normalMap.repeat.set(30, 30);
-  normalMap.anisotropy = 8;
-
-  const material = new THREE.MeshStandardMaterial({
-    roughness: 0.75,
-    color: ENVIRONMENT_COLOR,
-    normalMap: normalMap,
-  });
-
-  return (
-    <mesh
-      castShadow
-      receiveShadow
-      position={[0, -0.005, 0]}
-      rotation={[-Math.PI / 2, 0, 0]}
-      material={material}
-    >
-      <circleGeometry args={[20, 32]} />
-    </mesh>
-  );
-}
+    const normalMap = useTexture("/concrete-normal.avif");
+    normalMap.wrapS = THREE.RepeatWrapping;
+    normalMap.wrapT = THREE.RepeatWrapping;
+    normalMap.repeat.set(30, 30);
+    normalMap.anisotropy = 8;
+  
+    const material = new THREE.MeshStandardMaterial({
+      roughness: 0.75,
+      color: ENVIRONMENT_COLOR,
+      normalMap: normalMap,
+    });
+  
+    return (
+      <mesh
+        castShadow
+        receiveShadow
+        position={[0, -0.005, 0]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        material={material}
+      >
+        <circleGeometry args={[20, 32]} />
+      </mesh>
+    );
+  }

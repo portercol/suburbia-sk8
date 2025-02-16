@@ -44,7 +44,7 @@ export function Skateboard({
   truckColor,
   boltColor,
   constantWheelSpin = false,
-  pose = "upright"
+  pose = "upright",
 }: SkateboardProps) {
   const wheelRefs = useRef<THREE.Object3D[]>([]);
 
@@ -190,7 +190,11 @@ export function Skateboard({
   );
 
   return (
-    <group dispose={null} rotation={positions[pose].rotation} position={positions[pose].position}>
+    <group
+      dispose={null}
+      rotation={positions[pose].rotation}
+      position={positions[pose].position}
+    >
       <group name="Scene">
         <mesh
           name="GripTape"
