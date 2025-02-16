@@ -1,5 +1,7 @@
+"use client"
+
 import clsx from "clsx";
-import { SVGProps, use } from "react";
+import { SVGProps } from "react";
 
 import { useIsSafari } from "@/lib/useIsSafari";
 
