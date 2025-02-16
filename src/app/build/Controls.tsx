@@ -11,13 +11,19 @@ type Props = Pick<
   "wheels" | "decks" | "metals"
 > & { className?: string };
 
-export default function Controls({ wheels, decks, metals, className }: Props) {
-  return <div className={clsx("flex flex-col gap-6", className)}>
-    <Options title="Deck"></Options>
-    <Options title="Wheels"></Options>
-    <Options title="Trucks"></Options>
-    <Options title="Bolts"></Options>
-  </div>;
+export default function Controls({ 
+    // wheels,
+    // decks,
+    // metals,
+    className }: Props) {
+  return (
+    <div className={clsx("flex flex-col gap-6", className)}>
+      <Options title="Deck"></Options>
+      <Options title="Wheels"></Options>
+      <Options title="Trucks"></Options>
+      <Options title="Bolts"></Options>
+    </div>
+  );
 }
 
 type OptionsProps = {
