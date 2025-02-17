@@ -92,7 +92,7 @@ export default function Preview({ wheelTextureURLs, deckTextureURLs }: Props) {
 }
 
 function StageFloor() {
-    const normalMap = useTexture("/concrete-normal.avif");
+    const normalMap = useTexture("/image-texture.png");
     normalMap.wrapS = THREE.RepeatWrapping;
     normalMap.wrapT = THREE.RepeatWrapping;
     normalMap.repeat.set(30, 30);
