@@ -4,6 +4,7 @@ import { Bowlby_One_SC, DM_Mono } from "next/font/google";
 import "./globals.css";
 // import { Header } from "../components/Header";
 import { SVGFilters } from "@/components/SVGFilters";
+import { createClient } from "@/prismicio";
 // import { Footer } from "@/components/Footer";
 
 const bowlby = Bowlby_One_SC({
@@ -20,10 +21,18 @@ const dmMono = DM_Mono({
   weight: "500",
 });
 
-export const metadata: Metadata = {
-  title: "Suburbia Skate",
-  description: "Skate Shop e-commerce app",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const client = createClient()
+  const settings = await client.getSingle("settings")
+
+  return {
+    title: settings.data.site_title,
+    description: settings.data.meta_description,
+    openGraph: {
+      images: settings.data.fallback_og_image.url ?? undefined
+    }
+  };
+}
 
 export default function RootLayout({
   children,

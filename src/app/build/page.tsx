@@ -9,6 +9,7 @@ import { Logo } from "@/components/Logo";
 import { CustomizerControlsProvder } from "./context";
 import Preview from "./Preview";
 import Controls from "./Controls";
+import Loading from "./Loading";
 
 type SearchParams = {
   wheel?: string
@@ -70,6 +71,7 @@ export default async function page(props:{searchParams:Promise<SearchParams>}) {
           </ButtonLink>
         </div>
       </CustomizerControlsProvder>
+      <Loading />
     </div>
   );
 }
