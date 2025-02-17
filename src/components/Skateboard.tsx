@@ -127,7 +127,7 @@ export function Skateboard({
         metalness: 0.8,
         roughness: 0.25,
       }),
-    [truckColor]
+    [truckColor, metalNormal]
   );
 
   const deckMaterial = useMemo(
