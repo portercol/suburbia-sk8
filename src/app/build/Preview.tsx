@@ -8,7 +8,7 @@ import {
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { asImageSrc } from "@prismicio/client";
 
 import { useCustomizerControls } from "./context";
@@ -36,6 +36,41 @@ export default function Preview({ wheelTextureURLs, deckTextureURLs }: Props) {
     asImageSrc(selectedDeck?.texture) ?? DEFAULT_DECK_TEXTURE;
   const truckColor = selectedTruck?.color ?? DEFAULT_TRUCK_COLOR;
   const boltColor = selectedBolt?.color ?? DEFAULT_BOLT_COLOR;
+
+  useEffect(() => {
+    setCameraControls(
+      new THREE.Vector3(0, 0.09, 0),
+      new THREE.Vector3(1.5, 0.8, 0)
+    );
+  }, [selectedDeck]);
+
+  useEffect(() => {
+    setCameraControls(
+      new THREE.Vector3(-0.08, 0.54, 0.64),
+      new THREE.Vector3(0.09, 1, 0.9)
+    );
+  }, [selectedWheel]);
+
+  useEffect(() => {
+    setCameraControls(
+      new THREE.Vector3(-0.12, 0.29, 0.57),
+      new THREE.Vector3(0.1, 0.25, 0.9)
+    );
+  }, [selectedTruck]);
+
+  useEffect(() => {
+    setCameraControls(
+      new THREE.Vector3(-0.25, 0.3, 0.62),
+      new THREE.Vector3(-0.5, 0.35, 0.8)
+    );
+  }, [selectedBolt]);
+
+  function setCameraControls(target: THREE.Vector3, pos: THREE.Vector3) {
+    if (!cameraControls.current) return;
+
+    cameraControls.current.setTarget(target.x, target.y, target.z, true);
+    cameraControls.current.setPosition(pos.x, pos.y, pos.z, true);
+  }
 
   function onCameraControlStart() {
     if (
@@ -92,27 +127,27 @@ export default function Preview({ wheelTextureURLs, deckTextureURLs }: Props) {
 }
 
 function StageFloor() {
-    const normalMap = useTexture("/image-texture.png");
-    normalMap.wrapS = THREE.RepeatWrapping;
-    normalMap.wrapT = THREE.RepeatWrapping;
-    normalMap.repeat.set(30, 30);
-    normalMap.anisotropy = 8;
-  
-    const material = new THREE.MeshStandardMaterial({
-      roughness: 0.75,
-      color: ENVIRONMENT_COLOR,
-      normalMap: normalMap,
-    });
-  
-    return (
-      <mesh
-        castShadow
-        receiveShadow
-        position={[0, -0.005, 0]}
-        rotation={[-Math.PI / 2, 0, 0]}
-        material={material}
-      >
-        <circleGeometry args={[20, 32]} />
-      </mesh>
-    );
-  }
+  const normalMap = useTexture("/image-texture.png");
+  normalMap.wrapS = THREE.RepeatWrapping;
+  normalMap.wrapT = THREE.RepeatWrapping;
+  normalMap.repeat.set(30, 30);
+  normalMap.anisotropy = 8;
+
+  const material = new THREE.MeshStandardMaterial({
+    roughness: 0.75,
+    color: ENVIRONMENT_COLOR,
+    normalMap: normalMap,
+  });
+
+  return (
+    <mesh
+      castShadow
+      receiveShadow
+      position={[0, -0.005, 0]}
+      rotation={[-Math.PI / 2, 0, 0]}
+      material={material}
+    >
+      <circleGeometry args={[20, 32]} />
+    </mesh>
+  );
+}
